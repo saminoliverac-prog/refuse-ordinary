@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Automotive Atelier | Refuse Ordinary</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: '#d4af37',
+                        darkBg: '#080808',
+                        cardBg: '#121212',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for Glow Effects & Ground Gradient */
+        body {
+            background-color: #080808;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Subtle asphalt/ground gradient texture */
+        .stage-ground {
+            background: radial-gradient(ellipse at 50% 100%, rgba(35, 35, 40, 0.8) 0%, rgba(8, 8, 8, 1) 75%);
+        }
+
+        /* Headlight glow filters */
+        .headlight-glow {
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 25px rgba(200, 225, 255, 0.5));
+            transition: all 0.4s ease;
+        }
+
+        .car-container:hover .headlight-glow {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) drop-shadow(0 0 45px rgba(220, 240, 255, 0.9));
+        }
+
+        .red-car-glow {
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 30px rgba(255, 0, 0, 0.4));
+            transition: all 0.4s ease;
+        }
+
+        .car-container:hover .red-car-glow {
+            filter: drop-shadow(0 0 22px rgba(255, 255, 255, 1)) drop-shadow(0 0 50px rgba(255, 30, 30, 0.7));
+        }
+
+        /* Smooth floating animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .floating-car {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Ambient spotlight */
+        .spotlight {
+            background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+
+        /* Backdrop blur glass overlay */
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-white selection:text-black">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 px-6 lg:px-16 py-6 flex justify-between items-center bg-gradient-to-b from-black/90 to-transparent">
+        <div class="text-xl font-serif tracking-widest uppercase font-semibold text-white cursor-pointer hover:opacity-80 transition">
+            ATELIER <span class="text-xs text-neutral-400 block font-sans tracking-widest font-normal">BESPOKE AUTOMOTIVE</span>
+        </div>
+        
+        <nav class="hidden md:flex space-x-10 text-xs tracking-widest uppercase text-neutral-300 font-medium">
+            <a href="#atelier" class="hover:text-white transition duration-200">Atelier</a>
+            <a href="#models" class="hover:text-white transition duration-200">Models</a>
+            <a href="#bespoke" class="hover:text-white transition duration-200">Bespoke</a>
+            <a href="#contact" onclick="openModal()" class="hover:text-white transition duration-200">Inquire</a>
+        </nav>
+
+        <button onclick="openModal()" class="text-xs tracking-widest uppercase border border-neutral-700 px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition duration-300">
+            Book Consultation
+        </button>
+    </header>
+
+    <!-- Main Stage Section -->
+    <main class="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-4 spotlight stage-ground">
+        
+        <!-- Main Headline -->
+        <div class="text-center mt-6 mb-8 z-10 max-w-4xl px-4">
+            <h1 class="serif-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-tight tracking-tight text-neutral-100">
+                For Those Who<br/>Refuse Ordinary
+            </h1>
+        </div>
+
+        <!-- 3 Vehicles Grid Showcase -->
+        <div class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-end my-auto z-10 px-2 sm:px-6">
+            
+            <!-- Left Vehicle: Black Luxury G-Class SUV -->
+            <div class="car-container floating-car group cursor-pointer relative p-4 flex flex-col items-center transition transform duration-500 hover:scale-105" onclick="selectVehicle('G-Class Bespoke Edition', 'Pure power meets bespoke executive finish.')">
+                <div class="relative w-full max-w-md">
+                    <!-- High detail SVG Silhouette for Black SUV -->
+                    <svg viewBox="0 0 500 280" class="w-full h-auto drop-shadow-2xl">
+                        <!-- Vehicle Body -->
+                        <path d="M 50,220 L 60,110 L 120,90 L 380,90 L 440,110 L 450,220 Z" fill="#0d0d0d" stroke="#262626" stroke-width="2"/>
+                        <!-- Roof & Cabin -->
+                        <path d="M 125,90 L 140,25 L 360,25 L 375,90 Z" fill="#0a0a0a" stroke="#1f1f1f" stroke-width="2"/>
+                        <!-- Windshield -->
+                        <polygon points="145,30 355,30 365,85 135,85" fill="#15181c" opacity="0.9"/>
+                        <!-- Grille -->
+                        <rect x="180" y="115" width="140" height="75" rx="6" fill="#141414" stroke="#333" stroke-width="2"/>
+                        <line x1="200" y1="115" x2="200" y2="190" stroke="#2b2b2b" stroke-width="3"/>
+                        <line x1="220" y1="115" x2="220" y2="190" stroke="#2b2b2b" stroke-width="3"/>
+                        <line x1="240" y1="115" x2="240" y2="190" stroke="#2b2b2b" stroke-width="3"/>
+                        <line x1="260" y1="115" x2="260" y2="190" stroke="#2b2b2b" stroke-width="3"/>
+                        <line x1="280" y1="115" x2="280" y2="190" stroke="#2b2b2b" stroke-width="3"/>
+                        <line x1="300" y1="115" x2="300" y2="190" stroke="#2b2b2b" stroke-width="3"/>
+                        <!-- Mercedes Emblem Circle -->
+                        <circle cx="250" cy="150" r="18" fill="none" stroke="#666" stroke-width="2.5"/>
+                        <path d="M 250,132 L 250,150 L 235,160 M 250,150 L 265,160" stroke="#666" stroke-width="2"/>
+
+                        <!-- Left Headlight (Glow Ring) -->
+                        <circle cx="115" cy="140" r="24" fill="#050505" stroke="#333" stroke-width="3"/>
+                        <circle class="headlight-glow" cx="115" cy="140" r="18" fill="none" stroke="#ffffff" stroke-width="4"/>
+                        <circle cx="115" cy="140" r="10" fill="#ffffff" opacity="0.9"/>
+
+                        <!-- Right Headlight (Glow Ring) -->
+                        <circle cx="385" cy="140" r="24" fill="#050505" stroke="#333" stroke-width="3"/>
+                        <circle class="headlight-glow" cx="385" cy="140" r="18" fill="none" stroke="#ffffff" stroke-width="4"/>
+                        <circle cx="385" cy="140" r="10" fill="#ffffff" opacity="0.9"/>
+
+                        <!-- Bumper & Lower Vents -->
+                        <rect x="70" y="200" width="360" height="30" rx="4" fill="#111" stroke="#222"/>
+                        <rect x="190" y="205" width="120" height="20" rx="2" fill="#000"/>
+                        <!-- Wheels -->
+                        <rect x="40" y="210" width="30" height="40" rx="6" fill="#181818"/>
+                        <rect x="430" y="210" width="30" height="40" rx="6" fill="#181818"/>
+                        <!-- Ground Shadow -->
+                        <ellipse cx="250" cy="255" rx="210" ry="15" fill="#000" opacity="0.8"/>
+                    </svg>
+                </div>
+                <div class="text-center mt-3 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <span class="text-xs uppercase tracking-widest text-neutral-400">Iconic Off-Road Executive</span>
+                    <p class="text-sm font-semibold text-white">G-Series Atelier</p>
+                </div>
+            </div>
+
+            <!-- Center Vehicle: Red Porsche GT3 RS Style Supercar -->
+            <div class="car-container floating-car group cursor-pointer relative p-2 flex flex-col items-center transition transform duration-500 hover:scale-105 z-20" style="animation-delay: -2s;" onclick="selectVehicle('GT3 Sport Atelier', 'Aerodynamic precision engineered for peak track and street performance.')">
+                <div class="relative w-full max-w-md">
+                    <!-- High Detail SVG Silhouette for Red Sportscar -->
+                    <svg viewBox="0 0 500 260" class="w-full h-auto drop-shadow-2xl">
+                        <!-- Rear Wing -->
+                        <path d="M 80,85 L 420,85 L 410,70 L 90,70 Z" fill="#111" stroke="#333"/>
+                        <rect x="130" y="85" width="15" height="30" fill="#111"/>
+                        <rect x="355" y="85" width="15" height="30" fill="#111"/>
+
+                        <!-- Car Main Red Body -->
+                        <path d="M 60,200 L 75,130 L 140,105 L 360,105 L 425,130 L 440,200 Z" fill="#d90429" stroke="#ef233c" stroke-width="1.5"/>
+                        <!-- Black Aero Hood Details -->
+                        <polygon points="200,120 230,120 225,145 205,145" fill="#111"/>
+                        <polygon points="270,120 300,120 295,145 275,145" fill="#111"/>
+                        <path d="M 160,105 L 340,105 L 320,135 L 180,135 Z" fill="#111" opacity="0.85"/>
+
+                        <!-- Cabin Glass -->
+                        <path d="M 150,105 L 180,55 L 320,55 L 350,105 Z" fill="#0d1117" stroke="#222"/>
+
+                        <!-- Left Headlight Cluster (Oval Porsche Style) -->
+                        <ellipse cx="125" cy="140" rx="18" ry="14" fill="#1a1a1a" stroke="#d90429" stroke-width="2"/>
+                        <circle class="red-car-glow" cx="120" cy="138" r="5" fill="#ffffff"/>
+                        <circle class="red-car-glow" cx="130" cy="142" r="5" fill="#ffffff"/>
+
+                        <!-- Right Headlight Cluster -->
+                        <ellipse cx="375" cy="140" rx="18" ry="14" fill="#1a1a1a" stroke="#d90429" stroke-width="2"/>
+                        <circle class="red-car-glow" cx="370" cy="142" r="5" fill="#ffffff"/>
+                        <circle class="red-car-glow" cx="380" cy="138" r="5" fill="#ffffff"/>
+
+                        <!-- Center Hood Porsche Shield Emblem Placeholder -->
+                        <polygon points="250,135 254,142 250,148 246,142" fill="#d4af37"/>
+
+                        <!-- Lower Bumper / Splitter -->
+                        <path d="M 70,200 L 430,200 L 445,218 L 55,218 Z" fill="#111"/>
+                        <rect x="180" y="202" width="140" height="12" fill="#000"/>
+
+                        <!-- Wheels / Stance -->
+                        <rect x="45" y="185" width="28" height="35" rx="5" fill="#151515"/>
+                        <rect x="427" y="185" width="28" height="35" rx="5" fill="#151515"/>
+
+                        <!-- Ground Shadow -->
+                        <ellipse cx="250" cy="230" rx="220" ry="12" fill="#000" opacity="0.95"/>
+                    </svg>
+                </div>
+                <div class="text-center mt-3 opacity-100 transition duration-300">
+                    <span class="text-xs uppercase tracking-widest text-red-500 font-semibold">Track-Focused Bespoke</span>
+                    <p class="text-sm font-semibold text-white">GT3 RS Atelier Edition</p>
+                </div>
+            </div>
+
+            <!-- Right Vehicle: Dark Land Rover Defender SUV -->
+            <div class="car-container floating-car group cursor-pointer relative p-4 flex flex-col items-center transition transform duration-500 hover:scale-105" style="animation-delay: -4s;" onclick="selectVehicle('Defender Bespoke', 'Rugged sophistication reimagined for luxury adventures.')">
+                <div class="relative w-full max-w-md">
+                    <!-- High Detail SVG Silhouette for Dark Defender -->
+                    <svg viewBox="0 0 500 280" class="w-full h-auto drop-shadow-2xl">
+                        <!-- Vehicle Body -->
+                        <path d="M 55,215 L 65,100 L 130,85 L 370,85 L 435,100 L 445,215 Z" fill="#141619" stroke="#2a2e33" stroke-width="2"/>
+                        <!-- Roof -->
+                        <path d="M 130,85 L 140,28 L 360,28 L 370,85 Z" fill="#0c0d0e" stroke="#1c1e21"/>
+                        <!-- Windshield -->
+                        <polygon points="145,34 355,34 362,80 138,80" fill="#11161d"/>
+
+                        <!-- Hood DEFENDER Lettering Line -->
+                        <line x1="200" y1="94" x2="300" y2="94" stroke="#444" stroke-width="2" stroke-dasharray="4 4"/>
+
+                        <!-- Grille -->
+                        <rect x="175" y="110" width="150" height="35" rx="3" fill="#0d0e10" stroke="#25282e"/>
+                        <line x1="175" y1="127" x2="325" y2="127" stroke="#222" stroke-width="3"/>
+
+                        <!-- Left Headlight (Semi-Square Halo Defender Style) -->
+                        <rect x="105" y="110" width="45" height="40" rx="8" fill="#090a0c" stroke="#222"/>
+                        <path class="headlight-glow" d="M 115,120 A 15 15 0 1 1 140,140" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="127" cy="130" r="7" fill="#ffffff"/>
+
+                        <!-- Right Headlight -->
+                        <rect x="350" y="110" width="45" height="40" rx="8" fill="#090a0c" stroke="#222"/>
+                        <path class="headlight-glow" d="M 360,140 A 15 15 0 1 1 385,120" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="373" cy="130" r="7" fill="#ffffff"/>
+
+                        <!-- Lower Bumper -->
+                        <rect x="75" y="180" width="350" height="35" rx="5" fill="#0a0b0d" stroke="#1e2124"/>
+                        <rect x="200" y="188" width="100" height="18" fill="#15171a"/>
+
+                        <!-- Wheels -->
+                        <rect x="45" y="200" width="28" height="40" rx="5" fill="#111"/>
+                        <rect x="427" y="200" width="28" height="40" rx="5" fill="#111"/>
+
+                        <!-- Ground Shadow -->
+                        <ellipse cx="250" cy="250" rx="210" ry="14" fill="#000" opacity="0.85"/>
+                    </svg>
+                </div>
+                <div class="text-center mt-3 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <span class="text-xs uppercase tracking-widest text-neutral-400">Modern Bespoke Explorer</span>
+                    <p class="text-sm font-semibold text-white">Defender V8 Atelier</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Subtitle Below Cars -->
+        <div class="text-center mt-8 z-10 max-w-2xl px-4">
+            <p class="text-sm sm:text-base text-neutral-400 font-normal tracking-wide leading-relaxed">
+                A luxury automotive atelier for bespoke styling, performance and craftsmanship.
+            </p>
+        </div>
+
+        <!-- Scroll / Action Indicator -->
+        <div class="mt-8 z-10 flex flex-col items-center">
+            <button onclick="openModal()" class="text-xs uppercase tracking-widest text-neutral-300 border-b border-neutral-600 pb-1 hover:border-white hover:text-white transition">
+                Explore The Collection &rarr;
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-900 bg-black/80 px-6 lg:px-16 py-6 flex flex-col sm:flex-row justify-between items-center text-xs text-neutral-500 z-10">
+        <div>
+            &copy; <span id="year"></span> Bespoke Automotive Atelier. All rights reserved.
+        </div>
+        <div class="flex space-x-6 mt-4 sm:mt-0">
+            <a href="#" class="hover:text-neutral-300 transition">Privacy Policy</a>
+            <a href="#" class="hover:text-neutral-300 transition">Terms of Service</a>
+            <a href="#" class="hover:text-neutral-300 transition">Press Kit</a>
+        </div>
+    </footer>
+
+    <!-- Interactive Inquiry Modal -->
+    <div id="inquiryModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel p-8 rounded-2xl max-w-lg w-full relative text-left">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl p-2">&times;</button>
+            
+            <span class="text-xs uppercase tracking-widest text-neutral-400">Personalized Service</span>
+            <h3 id="modalTitle" class="serif-title text-2xl font-normal text-white mt-1 mb-2">Bespoke Inquiry</h3>
+            <p id="modalDescription" class="text-xs text-neutral-400 mb-6">Connect with our master craftsmen and design consultants to commission your custom vehicle build.</p>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Full Name</label>
+                    <input type="text" required placeholder="e.g. Lord Sterling" class="w-full bg-neutral-900/80 border border-neutral-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neutral-500">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Email Address</label>
+                    <input type="email" required placeholder="sterling@atelier.com" class="w-full bg-neutral-900/80 border border-neutral-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neutral-500">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Vehicle of Interest</label>
+                    <select id="vehicleSelect" class="w-full bg-neutral-900/80 border border-neutral-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neutral-500">
+                        <option value="GT3 Sport Atelier">GT3 RS Sport Atelier</option>
+                        <option value="G-Class Bespoke Edition">G-Class Executive Atelier</option>
+                        <option value="Defender Bespoke">Defender V8 Atelier</option>
+                        <option value="Full Custom Commission">Full Custom Commission</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Bespoke Requirements</label>
+                    <textarea rows="3" placeholder="Specify performance upgrades, interior materials, or custom livery..." class="w-full bg-neutral-900/80 border border-neutral-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neutral-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-white text-black font-medium text-xs uppercase tracking-widest rounded-lg hover:bg-neutral-200 transition duration-200 mt-2">
+                    Submit Commission Request
+                </button>
+            </form>
+
+            <div id="confirmationMsg" class="hidden mt-4 p-3 bg-neutral-800 text-green-400 text-xs rounded text-center">
+                Thank you. Our atelier concierge will contact you within 24 hours.
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function openModal() {
+            document.getElementById('inquiryModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('inquiryModal').classList.add('hidden');
+            document.getElementById('confirmationMsg').classList.add('hidden');
+        }
+
+        function selectVehicle(name, description) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalDescription').innerText = description;
+            document.getElementById('vehicleSelect').value = name;
+            openModal();
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const msg = document.getElementById('confirmationMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                closeModal();
+            }, 2500);
+        }
+
+        // Close modal when clicking outside box
+        window.onclick = function(event) {
+            const modal = document.getElementById('inquiryModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
